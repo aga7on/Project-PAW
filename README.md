@@ -40,6 +40,16 @@ New-Item -ItemType Junction -Path "$env:USERPROFILE\Zomboid\mods\ProjectPAW" -Ta
 
 ## Git
 
+Короткий путь — скрипт `sync.ps1` в корне репозитория:
+
+```powershell
+.\sync.ps1 status              # что изменено и последние коммиты
+.\sync.ps1 pull                # забрать свежие файлы из GitHub
+.\sync.ps1 push "что сделал"   # закоммитить все изменения и отправить на GitHub
+```
+
+Вручную то же самое:
+
 ```powershell
 git pull            # забрать свежие файлы из GitHub
 git add -A
@@ -47,4 +57,4 @@ git commit -m "..." # зафиксировать изменения
 git push            # отправить на GitHub
 ```
 
-Ветка по умолчанию — `main`. Первый `push` попросит войти в GitHub (окно Git Credential Manager), дальше вход запомнится.
+Ветка по умолчанию — `main`. Вход в GitHub уже сохранён в Git Credential Manager, пароль спрашивать не будет.

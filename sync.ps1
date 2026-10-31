@@ -12,23 +12,28 @@ if (-not $git) { $git = 'C:\Program Files\Git\cmd\git.exe' }
 
 Set-Location -LiteralPath $PSScriptRoot
 
+function Invoke-Git {
+    param([string[]]$Arguments)
+    & $git @Arguments 2>&1 | ForEach-Object { Write-Host $_ }
+}
+
 switch ($Action) {
     'pull' {
-        & $git pull --ff-only
+        Invoke-Git @('pull', '--ff-only')
     }
     'push' {
-        & $git add -A
-        & $git diff --cached --quiet
+        Invoke-Git @('add', '-A')
+        & $git diff --cached --quiet 2>&1 | Out-Null
         if ($LASTEXITCODE -ne 0) {
-            & $git commit -m $Message
+            Invoke-Git @('commit', '-m', $Message)
         }
         else {
             Write-Host 'No changes to commit.'
         }
-        & $git push
+        Invoke-Git @('push')
     }
     'status' {
-        & $git status -sb
-        & $git log --oneline -5
+        Invoke-Git @('status', '-sb')
+        Invoke-Git @('log', '--oneline', '-5')
     }
 }
