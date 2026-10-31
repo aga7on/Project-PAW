@@ -117,13 +117,15 @@ python tools/extract_game_data.py "G:/SteamLibrary/steamapps/common/ProjectZombo
 Короткий путь — скрипт `sync.ps1` в корне репозитория:
 
 ```powershell
-.\sync.ps1 status              # что изменено и последние коммиты
-.\sync.ps1 pull                # забрать свежие файлы из GitHub
-.\sync.ps1 push "что сделал"   # закоммитить изменения и отправить ветку
+.\sync.ps1 status                 # что изменено, ветка, последние коммиты
+.\sync.ps1 pull                   # забрать свежие изменения
+.\sync.ps1 branch artem/my-task   # создать рабочую ветку от свежего main
+.\sync.ps1 check                  # валидатор + проверка синтаксиса
+.\sync.ps1 push "что сделал"      # проверить, закоммитить и отправить ветку
 ```
 
-`sync.ps1 push` **не пушит в `main`**: скрипт создаёт рабочую ветку и отправляет её,
-дальше — PR. Прямой push в `main` запрещён branch protection.
+`sync.ps1 push` **не пушит в `main`**: на `main` скрипт откажется работать и предложит
+создать ветку. Дальше — PR, ревью и squash-merge.
 
 Вручную то же самое:
 

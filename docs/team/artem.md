@@ -14,6 +14,7 @@
 | `ProjectPAW/media/textures/ProjectPAW/` | иконки, которые добавляешь ты |
 | `.github/`, `tools/`, `docs/00`–`07` | инфраструктура и документация |
 | `mod.info`, `workshop.txt` | метаданные и публикация |
+| `sync.ps1`, `README.md`, `AGENTS.md`, `CONTRIBUTING.md` | общие файлы репозитория |
 
 ## Текущие задачи
 
@@ -31,7 +32,7 @@
 
 - `media/maps/**` — Влад.
 - `media/lua/server/**` — Влад.
-- `media/scripts/characters/**` — Андрей.
+- `media/scripts/ProjectPAW/characters/**` — Андрей.
 - `media/lua/shared/Sandbox/**` — Андрей. Свои значения передавай issue, не правь файл.
 - `docs/world/**`, `docs/balance/**` — соответствующие владельцы.
 
@@ -40,7 +41,7 @@
 ```bash
 git switch main && git pull --ff-only
 git switch -c artem/obsolete-smoke-test
-# добавить item Pistol { Obsolete = true } в media/scripts/items/
+# добавить item Pistol { Obsolete = true } в media/scripts/ProjectPAW/items/
 python tools/validate_mod.py
 ```
 

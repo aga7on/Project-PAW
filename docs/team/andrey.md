@@ -40,8 +40,8 @@
 
 ## Не трогать
 
-- `media/scripts/items/**`, `media/scripts/recipes/**` — Артём.
-- `media/lua/server/**`, `media/maps/**` — Влад.
+- `media/scripts/ProjectPAW/items/**`, `media/scripts/ProjectPAW/recipes/**` — Артём.
+- `media/lua/server/ProjectPAW/**`, `media/maps/**` — Влад.
 - `mod.info`, `workshop.txt` — Артём.
 - `docs/01`, `docs/02`, `docs/05` — Артём.
 
