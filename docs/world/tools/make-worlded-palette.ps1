@@ -1,6 +1,6 @@
 ﻿param(
     [string]$RulesPath = 'W:\SteamLibrary\steamapps\common\Project Zomboid Modding Tools\WorldEd\Rules.txt',
-    [string]$OutDir = (Join-Path (Split-Path $PSScriptRoot -Parent) 'docs')
+    [string]$OutDir = (Split-Path $PSScriptRoot -Parent)
 )
 
 $ErrorActionPreference = 'Stop'
@@ -16,6 +16,41 @@ foreach ($m in [regex]::Matches($text, '(?s)alias\s*\{(.*?)\}')) {
     $tilesRaw = [regex]::Match($body, '(?s)tiles\s*=\s*\[(.*?)\]').Groups[1].Value
     if (-not $name) { continue }
     $aliases[$name] = @(($tilesRaw -split "\s+") | Where-Object { $_ -match '\S' })
+}
+
+# Русские названия поверхностей (оригинал из Rules.txt сохраняется в колонке «Оригинал»)
+$ru = @{
+    'Dark Asphalt (main roads)'       = 'Тёмный асфальт (главные дороги)'
+    'Medium Asphalt'                  = 'Средний асфальт'
+    'Light Asphalt'                   = 'Светлый асфальт'
+    'Dark Pothole'                    = 'Тёмная выбоина'
+    'Light Pothole'                   = 'Светлая выбоина'
+    'Dark Grass'                      = 'Тёмная трава'
+    'Medium Grass'                    = 'Средняя трава'
+    'Light Grass'                     = 'Светлая трава'
+    'Dirt'                            = 'Земля'
+    'Dirt Grass'                      = 'Земля с травой'
+    'Gravel Dirt'                     = 'Гравийная земля'
+    'Sand'                            = 'Песок'
+    'Water'                           = 'Вода'
+    'Trees'                           = 'Деревья'
+    'Trees + Dark grass'              = 'Деревья + тёмная трава'
+    'Trees + Medium grass'            = 'Деревья + средняя трава'
+    'Trees + Light grass'             = 'Деревья + светлая трава'
+    'Fir Trees + Dark grass'          = 'Ели + тёмная трава'
+    'Fir Trees + Medium grass'        = 'Ели + средняя трава'
+    'Fir Trees + Light grass'         = 'Ели + светлая трава'
+    'Dense Trees + Dark grass'        = 'Густые деревья + тёмная трава'
+    'Dense Trees + Medium grass'      = 'Густые деревья + средняя трава'
+    'Dense Trees + Light grass'       = 'Густые деревья + светлая трава'
+    'Bushes, Grass, Few Trees (dark)'   = 'Кусты, трава, редкие деревья (тёмная)'
+    'Bushes, Grass, Few Trees (medium)' = 'Кусты, трава, редкие деревья (средняя)'
+    'Bushes, Grass, Few Trees (light)'  = 'Кусты, трава, редкие деревья (светлая)'
+    'Grass (all types)'               = 'Трава (все типы)'
+    'Light long grass'                = 'Светлая высокая трава'
+    'Grass + Few Trees (dark)'        = 'Трава + редкие деревья (тёмная)'
+    'Grass + Few Trees (medium)'      = 'Трава + редкие деревья (средняя)'
+    'Grass + Few Trees (light)'       = 'Трава + редкие деревья (светлая)'
 }
 
 $rules = @()
@@ -51,8 +86,11 @@ foreach ($m in [regex]::Matches($text, '(?s)rule\s*\{(.*?)\}')) {
         $sample = if ($expanded.Count -gt 0) { $expanded[0] } else { $aliasName }
     }
 
+    $labelEn = if ($label) { $label } else { '(без названия)' }
+    $labelRu = if ($ru.ContainsKey($labelEn)) { $ru[$labelEn] } else { $labelEn }
+
     $rules += [pscustomobject]@{
-        Label = if ($label) { $label } else { '(без названия)' }; R = $r; G = $g; B = $b
+        Label = $labelEn; LabelRu = $labelRu; R = $r; G = $g; B = $b
         Hex = ('#{0:X2}{1:X2}{2:X2}' -f $r, $g, $b)
         Layer = $layer; Bitmap = $bitmap; Condition = $cond
         Alias = if ($isAlias) { $aliasName } else { '' }
@@ -61,7 +99,7 @@ foreach ($m in [regex]::Matches($text, '(?s)rule\s*\{(.*?)\}')) {
     }
 }
 
-$rules = $rules | Sort-Object @{ Expression = { if ($_.Kind -eq 'поверхность') { 0 } else { 1 } } }, Layer, Label
+$rules = $rules | Sort-Object @{ Expression = { if ($_.Kind -eq 'поверхность') { 0 } else { 1 } } }, Layer, LabelRu
 "правил: $($rules.Count)  алиасов: $($aliases.Count)"
 
 $sb = New-Object System.Text.StringBuilder
@@ -70,17 +108,19 @@ $sb = New-Object System.Text.StringBuilder
 [void]$sb.AppendLine('Соответствие «цвет → тайлы» для рисования карты в WorldEd. Источник — `WorldEd\Rules.txt`')
 [void]$sb.AppendLine('из Project Zomboid Modding Tools (Build 42.21). Сгенерировано автоматически.')
 [void]$sb.AppendLine()
+[void]$sb.AppendLine('Названия переведены на русский; исходные подписи из `Rules.txt` — в колонке «Оригинал».')
+[void]$sb.AppendLine()
 [void]$sb.AppendLine('![Палитра WorldEd](worlded-colors.png)')
 [void]$sb.AppendLine()
 [void]$sb.AppendLine('## Поверхности (`bitmap = 0`)')
 [void]$sb.AppendLine()
 [void]$sb.AppendLine('Базовый слой: цвет заливки клетки целиком заменяется тайлами из правила.')
 [void]$sb.AppendLine()
-[void]$sb.AppendLine('| Свотч | RGB | HEX | Тип поверхности | Слой | Алиас | Тайлы |')
-[void]$sb.AppendLine('|---|---|---|---|---|---|---|')
+[void]$sb.AppendLine('| Свотч | RGB | HEX | Тип поверхности | Оригинал (`Rules.txt`) | Слой | Алиас | Тайлы |')
+[void]$sb.AppendLine('|---|---|---|---|---|---|---|---|')
 foreach ($r in $rules | Where-Object Kind -eq 'поверхность') {
-    [void]$sb.AppendLine(('| {0} | {1} {2} {3} | `{4}` | {5} | `{6}` | {7} | {8} |' -f `
-        ('`' + $r.Hex + '`'), $r.R, $r.G, $r.B, $r.Hex, $r.Label, $r.Layer, `
+    [void]$sb.AppendLine(('| {0} | {1} {2} {3} | `{4}` | {5} | {6} | `{7}` | {8} | {9} |' -f `
+        ('`' + $r.Hex + '`'), $r.R, $r.G, $r.B, $r.Hex, $r.LabelRu, $r.Label, $r.Layer, `
         ($(if ($r.Alias) { '`' + $r.Alias + '`' } else { '—' })), $r.TilesDisplay))
 }
 [void]$sb.AppendLine()
@@ -89,15 +129,15 @@ foreach ($r in $rules | Where-Object Kind -eq 'поверхность') {
 [void]$sb.AppendLine('Кладутся поверх базовой поверхности. `condition` — цвет базовой поверхности, на которую')
 [void]$sb.AppendLine('правило наносится (например, «деревья + тёмная трава»).')
 [void]$sb.AppendLine()
-[void]$sb.AppendLine('| Свотч | RGB | HEX | Тип | Слой | База (`condition`) | Тайлы |')
-[void]$sb.AppendLine('|---|---|---|---|---|---|---|')
+[void]$sb.AppendLine('| Свотч | RGB | HEX | Тип | Оригинал (`Rules.txt`) | Слой | База (`condition`) | Тайлы |')
+[void]$sb.AppendLine('|---|---|---|---|---|---|---|---|')
 foreach ($r in $rules | Where-Object Kind -eq 'оверлей') {
     $cond = if ($r.Condition) {
         $c = $r.Condition -split ' '
         '`{0} {1} {2}`' -f $c[0], $c[1], $c[2]
     } else { '—' }
-    [void]$sb.AppendLine(('| {0} | {1} {2} {3} | `{4}` | {5} | `{6}` | {7} | {8} |' -f `
-        ('`' + $r.Hex + '`'), $r.R, $r.G, $r.B, $r.Hex, $r.Label, $r.Layer, $cond, $r.TilesDisplay))
+    [void]$sb.AppendLine(('| {0} | {1} {2} {3} | `{4}` | {5} | {6} | `{7}` | {8} | {9} |' -f `
+        ('`' + $r.Hex + '`'), $r.R, $r.G, $r.B, $r.Hex, $r.LabelRu, $r.Label, $r.Layer, $cond, $r.TilesDisplay))
 }
 [void]$sb.AppendLine()
 [void]$sb.AppendLine('## Как это работает')
@@ -129,6 +169,7 @@ $fontTitle = New-Object System.Drawing.Font 'Segoe UI', 20, ([System.Drawing.Fon
 $fontSub = New-Object System.Drawing.Font 'Segoe UI', 11
 $fontSection = New-Object System.Drawing.Font 'Segoe UI', 13, ([System.Drawing.FontStyle]::Bold)
 $fontLabel = New-Object System.Drawing.Font 'Segoe UI', 11, ([System.Drawing.FontStyle]::Bold)
+$fontEn = New-Object System.Drawing.Font 'Consolas', 8.5
 $fontMono = New-Object System.Drawing.Font 'Consolas', 9.5
 $white = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(235, 235, 235))
 $grey = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(150, 150, 155))
@@ -164,7 +205,8 @@ foreach ($r in $surfaces) {
     $g.DrawRectangle($border, $rect)
     $brush.Dispose()
 
-    $g.DrawString($r.Label, $fontLabel, $white, 64, ($y + 5))
+    $g.DrawString($r.LabelRu, $fontLabel, $white, 64, ($y + 1))
+    $g.DrawString($r.Label, $fontEn, $grey, 64, ($y + 16))
     $g.DrawString(('{0} {1} {2}   {3}' -f $r.R, $r.G, $r.B, $r.Hex), $fontMono, $grey, 560, ($y + 8))
     $g.DrawString($r.Layer, $fontMono, $grey, 800, ($y + 8))
     $g.DrawString($r.Sample, $fontMono, $grey, 1050, ($y + 8))
@@ -183,7 +225,8 @@ foreach ($r in $overlays) {
     $brush.Dispose()
 
     $cond = if ($r.Condition) { $r.Condition } else { '—' }
-    $g.DrawString($r.Label, $fontLabel, $white, 64, ($y + 5))
+    $g.DrawString($r.LabelRu, $fontLabel, $white, 64, ($y + 1))
+    $g.DrawString($r.Label, $fontEn, $grey, 64, ($y + 16))
     $g.DrawString(('{0} {1} {2}   {3}' -f $r.R, $r.G, $r.B, $r.Hex), $fontMono, $grey, 560, ($y + 8))
     $g.DrawString($r.Layer, $fontMono, $grey, 800, ($y + 8))
     $g.DrawString($cond, $fontMono, $grey, 920, ($y + 8))
