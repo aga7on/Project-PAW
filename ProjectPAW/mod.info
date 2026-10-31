@@ -1,0 +1,8 @@
+name=Project PAW
+id=ProjectPAW
+description=Medieval overhaul for Project Zomboid (Build 42). Work in progress.
+poster=poster.png
+modversion=0.1.0
+authors=aga7on
+versionMin=42.0
+url=https://github.com/aga7on/Project-PAW

@@ -1,0 +1,12 @@
+# Текстовые файлы мода — всегда LF, чтобы Lua/скрипты одинаково читались на любых ОС
+* text=auto eol=lf
+
+# Бинарные ресурсы
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.x binary
+*.fbx binary
+*.jar binary
+*.zip binary

@@ -1,0 +1,19 @@
+# Сайт «Вектор» (Next.js) — живёт отдельно от мода и в репозиторий не попадает
+/site/
+
+# Служебные файлы ОС и редакторов
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Логи игры/мода
+*.log
+console.txt
+logs.zip
+
+# Собранные архивы мода
+/dist/
+*.zip
