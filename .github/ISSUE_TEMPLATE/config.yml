@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Правила для агентов и людей
+    url: https://github.com/aga7on/Project-PAW/blob/main/AGENTS.md
+    about: Прочитать перед созданием задачи или PR
+  - name: Как работать в репозитории
+    url: https://github.com/aga7on/Project-PAW/blob/main/CONTRIBUTING.md
+    about: Ветки, коммиты, ревью, тестирование
+  - name: Зоны ответственности и журнал решений
+    url: https://github.com/aga7on/Project-PAW/blob/main/docs/07-teamwork.md
+    about: Кто чем владеет и как принимаются решения

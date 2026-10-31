@@ -1,0 +1,45 @@
+name: Задача
+description: Работа в одной зоне: контент, карта, баланс или инфраструктура
+labels: ["task"]
+body:
+  - type: dropdown
+    id: zone
+    attributes:
+      label: Зона
+      description: Кто владелец и какие файлы затрагиваются
+      options:
+        - content — предметы, рецепты, удаление современного (Артём)
+        - map — карта, спавн, зоны (Влад)
+        - story — сюжет, записки, события (Влад)
+        - balance — профессии, трейты, песочница (Андрей)
+        - docs / infra — документы, CI, структура (Артём)
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Что сделать
+      description: Конкретный результат, а не процесс
+      placeholder: "Убрать из мира 9 типов патронов и 30 коробок"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Зачем
+      description: Какая цель проекта или какая проблема этим закрывается
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Критерий приёмки
+      description: Как проверить, что готово. В идеале — наблюдаемое поведение в игре
+      placeholder: "За 2 часа в новом мире не встречается ни одного патрона"
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Риски и зависимости
+      description: Что блокирует, что может сломаться, чья зона задействована

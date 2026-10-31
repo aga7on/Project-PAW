@@ -8,6 +8,15 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+*.bak
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
 
 # Логи игры/мода
 *.log
@@ -17,3 +26,12 @@ logs.zip
 # Собранные архивы мода
 /dist/
 *.zip
+
+# Сохранения и профиль игры — не часть репозитория
+/Saves/
+/Zomboid/
+
+# Сгенерированные бинарники карты (см. CONTRIBUTING.md, раздел 8)
+*.pack
+*.lotpack
+*.lotheader

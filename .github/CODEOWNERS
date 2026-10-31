@@ -1,0 +1,39 @@
+# Код-овнеры Project PAW.
+# GitHub автоматически запрашивает ревью у владельца зоны.
+#
+# Пока вписан только @aga7on: логины Влада и Андрея нужно добавить после того,
+# как они примут приглашение в репозиторий (невалидный логин ломает файл).
+#
+# Когда логины известны, раскомментировать и заменить @vlad-login / @andrey-login:
+#   /ProjectPAW/media/maps/                            @vlad-login
+#   /ProjectPAW/media/lua/server/ProjectPAW/           @vlad-login
+#   /ProjectPAW/media/lua/shared/ProjectPAW/PZM_Story/ @vlad-login
+#   /docs/world/                                       @vlad-login
+#
+#   /ProjectPAW/media/scripts/ProjectPAW/characters/   @andrey-login
+#   /ProjectPAW/media/lua/shared/Sandbox/              @andrey-login
+#   /docs/balance/                                     @andrey-login
+
+# Всё остальное — Артём (контент, удаление, инфраструктура).
+*                                       @aga7on
+
+/ProjectPAW/mod.info                    @aga7on
+/ProjectPAW/poster.png                  @aga7on
+/ProjectPAW/media/scripts/ProjectPAW/items/      @aga7on
+/ProjectPAW/media/scripts/ProjectPAW/recipes/    @aga7on
+/ProjectPAW/media/lua/shared/ProjectPAW/PZM_Removal.lua  @aga7on
+/ProjectPAW/media/lua/client/ProjectPAW/         @aga7on
+/workshop.txt                           @aga7on
+/.github/                               @aga7on
+/tools/                                 @aga7on
+/sync.ps1                               @aga7on
+/AGENTS.md                              @aga7on
+/CONTRIBUTING.md                        @aga7on
+/docs/00-index.md                       @aga7on
+/docs/01-mechanics-inventory.md         @aga7on
+/docs/02-modern-systems-removal.md      @aga7on
+/docs/03-blackpowder-firearms.md        @aga7on
+/docs/04-mod-architecture.md            @aga7on
+/docs/05-data-report.md                 @aga7on
+/docs/06-roadmap.md                     @aga7on
+/docs/07-teamwork.md                    @aga7on

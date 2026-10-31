@@ -1,0 +1,10 @@
+﻿id,name,module,file,line,item_type,display_category,categories,tags,weight,is_firearm,ammo_type,clip_size,is_ammo,is_vehicle_part
+Base.308Bullets,308Bullets,Base,normal.txt,13375,base:normal,Ammo,,base:ammo,0.04,0,,,1,0
+Base.556Bullets,556Bullets,Base,normal.txt,13388,base:normal,Ammo,,base:ammo,0.035,0,,,1,0
+Base.3030Bullets,3030Bullets,Base,normal.txt,13401,base:normal,Ammo,,base:ammo,0.05,0,,,1,0
+Base.Bullets357,Bullets357,Base,normal.txt,13414,base:normal,Ammo,,base:ammo,0.02,0,,,1,0
+Base.Bullets38,Bullets38,Base,normal.txt,13426,base:normal,Ammo,,base:ammo,0.015,0,,,1,0
+Base.Bullets44,Bullets44,Base,normal.txt,13438,base:normal,Ammo,,base:ammo,0.03,0,,,1,0
+Base.Bullets45,Bullets45,Base,normal.txt,13450,base:normal,Ammo,,base:ammo,0.025,0,,,1,0
+Base.Bullets9mm,Bullets9mm,Base,normal.txt,13462,base:normal,Ammo,,base:ammo,0.02,0,,,1,0
+Base.ShotgunShells,ShotgunShells,Base,normal.txt,13474,base:normal,Ammo,,base:ammo;base:shotgunshell,0.06,0,,,1,0

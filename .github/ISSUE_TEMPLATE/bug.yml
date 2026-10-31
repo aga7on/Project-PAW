@@ -1,0 +1,47 @@
+name: Баг
+description: Что-то сломалось или ведёт себя не так
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Что произошло
+      description: Наблюдаемое поведение, без догадок о причине
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Что ожидалось
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как воспроизвести
+      description: Новый мир или старое сохранение, какие моды включены, что нажать
+      placeholder: |
+        1. Новый мир, пресет Project PAW
+        2. Взять пистолет, выстрелить
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Логи и ошибки
+      description: Строки из console.txt с ERROR / WARN по ProjectPAW
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Версия
+      description: Версия игры и мода (modversion)
+      placeholder: "42.21.0 / 0.1.0"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Проверено
+      options:
+        - label: Баг воспроизводится на новом мире
+        - label: Другие моды отключены
