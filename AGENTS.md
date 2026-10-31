@@ -87,7 +87,7 @@ git switch -c artem/remove-ammo      # <зона>/<краткое-имя>
 
 ```bash
 python tools/validate_mod.py        # структура мода, дубли предметов, битые ссылки в docs
-python -m py_compile tools/*.py     # если менял скрипты
+python -m compileall -q tools       # если менял скрипты
 ```
 
 Валидатор не требует установленной игры: ванильный список предметов берётся из
