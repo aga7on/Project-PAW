@@ -10,8 +10,8 @@
 | Участник | Роль | Зона | Ветки |
 |---|---|---|---|
 | **Артём** (`@aga7on`) | Удаление современного мира, инфраструктура, релизы | `media/scripts/ProjectPAW/items`, `.../recipes`, `media/lua/shared/ProjectPAW/PZM_Removal.lua`, `.github/`, `tools/`, `ProjectPAW/mod.info` | `artem/*`, `infra/*` |
-| **Влад** | Карта, сюжет, мир | `media/maps/`, `media/lua/server/ProjectPAW/`, `media/lua/shared/ProjectPAW/PZM_Story/`, `docs/world/` | `vlad/*` |
-| **Андрей** | Механики, баланс, прогрессия | `media/scripts/ProjectPAW/characters/`, `media/lua/shared/Sandbox/`, `docs/balance/` | `andrey/*` |
+| **Влад** (`@vladvolt27-rgb`) | Карта, сюжет, мир | `media/maps/`, `media/lua/server/ProjectPAW/`, `media/lua/shared/ProjectPAW/PZM_Story/`, `docs/world/` | `vlad/*` |
+| **Андрей** (`@FruitPaw1337`) | Механики, баланс, прогрессия | `media/scripts/ProjectPAW/characters/`, `media/lua/shared/Sandbox/`, `docs/balance/` | `andrey/*` |
 
 Зоны выбраны так, чтобы **файлы почти не пересекались**. Пересечения — в разделе 4.
 
@@ -122,7 +122,7 @@ squash-merge в main
 | 4 | 2026-10-31 | `docs/data/` только генерируется | Ручные числа невозможно воспроизвести и сверить | Артём |
 | 5 | 2026-10-31 | Бинарники карты не в git | Git не хранит большие бинарники; размер Малдро — 4.3 ГБ | Артём |
 | 6 | 2026-10-31 | `sync.ps1` не пушит в `main`, только в рабочую ветку | Скрипт должен поддерживать правила, а не обходить их | Артём |
-| 7 | 2026-10-31 | В `CODEOWNERS` пока только `@aga7on`, чужие строки закомментированы | Невалидный логин ломает файл целиком; логины Влада и Андрея ещё неизвестны | Артём |
+| 7 | 2026-10-31 | `CODEOWNERS` заполнен по зонам: `@aga7on`, `@vladvolt27-rgb`, `@FruitPaw1337` | Ревью запрашивается у владельца зоны автоматически | Артём |
 
 Новое решение — отдельный PR с строкой в этой таблице.
 
@@ -135,9 +135,9 @@ squash-merge в main
 1. **Приглашение.** GitHub → Settings → Collaborators → *Add people* → ввести логин,
    роль **Write**. Приглашение придёт на почту или в GitHub-уведомления.
 2. **Принятие.** Участник принимает приглашение: иначе он не сможет пушить ветки.
-3. **`CODEOWNERS`.** После принятия добавить логин в `.github/CODEOWNERS`
-   (раскомментировать строки своей зоны). GitHub начнёт автоматически запрашивать
-   ревью у владельца зоны.
+3. **`CODEOWNERS`.** Добавить логин в `.github/CODEOWNERS` в секцию своей зоны.
+   GitHub начнёт автоматически запрашивать ревью у владельца зоны. Сейчас там уже
+   `@vladvolt27-rgb` (Влад) и `@FruitPaw1337` (Андрей).
 4. **Локальная настройка** (участник делает сам):
 
    ```powershell
